@@ -20,6 +20,7 @@ Ninguna de las tablas tendrá los campos created_at y updated_at. La tabla usuar
                     <th>Nombre</th>
                     <th>Apellidos</th>
                     <th>Fecha Nacimiento</th>
+                    <th>Edad</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -30,6 +31,10 @@ Ninguna de las tablas tendrá los campos created_at y updated_at. La tabla usuar
                     <td>{{$usuario->nombre}}</td>
                     <td>{{$usuario->apellidos}}</td>
                     <td>{{$usuario->f_nacimiento}}</td>
+                    {{-- Añadir a la tabla una columna con un accesor llamado edad,
+                     que mostrará la edad de los usuarios (1pto) --}}
+                     
+
                     <td><button class="btn btn-danger btn_borrar">Borrar</button></td>
                     {{--<td><a href="{{url('/usuarios')}}/{{$usuario->id}}/edit" class="btn btn-warning btn_editar">Editar</a></td> --}}
                 </tr>
