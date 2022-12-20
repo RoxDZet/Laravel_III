@@ -20,6 +20,7 @@ Ninguna de las tablas tendrá los campos created_at y updated_at. La tabla usuar
                     <th>Nombre</th>
                     <th>Apellidos</th>
                     <th>Fecha Nacimiento</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,8 +30,8 @@ Ninguna de las tablas tendrá los campos created_at y updated_at. La tabla usuar
                     <td>{{$usuario->nombre}}</td>
                     <td>{{$usuario->apellidos}}</td>
                     <td>{{$usuario->f_nacimiento}}</td>
-                    {{-- <td><button class="btn btn-danger btn_borrar">Borrar</button></td>
-                    <td><a href="{{url('/usuarios')}}/{{$usuario->id}}/edit" class="btn btn-warning btn_editar">Editar</a></td> --}}
+                    <td><button class="btn btn-danger btn_borrar">Borrar</button></td>
+                    {{--<td><a href="{{url('/usuarios')}}/{{$usuario->id}}/edit" class="btn btn-warning btn_editar">Editar</a></td> --}}
                 </tr>
                 @endforeach
             </tbody>
@@ -57,49 +58,39 @@ Ninguna de las tablas tendrá los campos created_at y updated_at. La tabla usuar
                 },
                 "order": [[ 1, "asc" ]],
                 "columnDefs": [
-                    { "orderable": false, "targets": [0, 2, 3] }
+                    { "orderable": false, "targets": [0, 2, 3, 4] }
                 ]
             });
         });
-    </script>
-
-
-    {{-- <script>
-        $(document).ready(function(){
-            $('#tabla').DataTable({
-            });
-            $("#tabla").on("click",".btn_borrar",function(e){
-                e.preventDefault();
-            
-                //confirmar con sweetalert
-                Swal.fire({
-                    title: '¿Estas seguro?',
-                    text: "No podras revertir esta accion",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, borrar!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        //redireccionar a la url
-                        //borrar con ajax
-                        const tr=$(this).closest("tr"); //tr más cercano al botón, o sea el tr que contiene al botón
-                        const id=tr.data("id"); //obtener el id del tr
-                        $.ajax({
-                            url: "{{url('/usuarios')}}/"+id,
-                            method: "DELETE",
-                            data: {
-                                "_token": "{{ csrf_token() }}"
-                            },
-                            success: function(){
-                                tr.fadeOut();
-                            }
-                        })
-                    }
-                })    
-            });
-        });
+        $("#tabla").on("click",".btn_borrar",function(e){
+            e.preventDefault();
         
-    </script> --}}
+            //confirmar con sweetalert
+            Swal.fire({
+                title: '¿Estas seguro?',
+                text: "No podras revertir esta accion",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, borrar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    //borrar con ajax
+                    const tr=$(this).closest("tr"); //tr más cercano al botón, o sea el tr que contiene al botón
+                    const id=tr.data("id"); //obtener el id del tr
+                    $.ajax({
+                        url: "{{url('/usuarios')}}/"+id,
+                        method: "DELETE",
+                        data: {
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function(){
+                            tr.fadeOut();
+                        }
+                    })
+                }
+            })    
+        });
+    </script>
 @endsection
