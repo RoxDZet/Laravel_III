@@ -36,6 +36,33 @@ Ninguna de las tablas tendrá los campos created_at y updated_at. La tabla usuar
             </tbody>
         </table>
     </div>
+    {{-- El listado del ejercicio anterior se mostrará en una tabla con el plugin Datatable. 
+    La tabla deberá mostrar los diferentes apartados en español y permitir sólo ordenar por el campo nombre. (1 pto) --}}
+    <script>
+        $(document).ready(function(){
+            $('#tabla').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se encontraron registros",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Último",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                },
+                "order": [[ 1, "asc" ]],
+                "columnDefs": [
+                    { "orderable": false, "targets": 0 }
+                ]
+            });
+        });
+    </script>
+
 
     {{-- <script>
         $(document).ready(function(){
