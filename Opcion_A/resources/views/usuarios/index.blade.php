@@ -57,7 +57,7 @@ Ninguna de las tablas tendrá los campos created_at y updated_at. La tabla usuar
                 },
                 "order": [[ 1, "asc" ]],
                 "columnDefs": [
-                    { "orderable": false, "targets": 0 }
+                    { "orderable": false, "targets": [0, 2, 3] }
                 ]
             });
         });
